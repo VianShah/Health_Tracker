@@ -8,3 +8,8 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 .DS_Store
+# xtool / SwiftPM
+.build/
+xtool/
+.sourcekit-lsp/
+Package.resolved

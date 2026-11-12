@@ -1,5 +1,8 @@
 import Foundation
 import UserNotifications
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Local reminders (no push server needed — works with a free Apple ID).
 @MainActor

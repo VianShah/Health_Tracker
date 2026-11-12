@@ -63,7 +63,7 @@
 	</array>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>$(PRODUCT_BUNDLE_IDENTIFIER).refresh</string>
+		<string>com.nutriscan.app.refresh</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>
@@ -84,8 +84,6 @@
 	<!-- Read by the app at runtime (see AppConfig.swift). -->
 	<key>NutriScanAPIBaseURL</key>
 	<string>$(API_BASE_URL)</string>
-	<key>NutriScanAppGroupID</key>
-	<string>$(APP_GROUP_ID)</string>
 	<key>NutriScanGoogleClientID</key>
 	<string>$(GOOGLE_IOS_CLIENT_ID)</string>
 	<key>NutriScanGoogleReversedClientID</key>

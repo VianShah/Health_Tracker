@@ -1,5 +1,8 @@
 import Foundation
 import UIKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 enum APIError: LocalizedError {
     case notSignedIn

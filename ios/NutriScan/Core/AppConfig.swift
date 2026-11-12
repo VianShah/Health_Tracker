@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Values baked in from Config/Signing.xcconfig, plus the server URL override
 /// a user can set in Settings without rebuilding.

@@ -1,4 +1,7 @@
 import SwiftUI
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 struct RootView: View {
     @EnvironmentObject private var model: AppModel

@@ -1,4 +1,7 @@
 import SwiftUI
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 @main
 struct NutriScanApp: App {

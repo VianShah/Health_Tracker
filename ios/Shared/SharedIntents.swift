@@ -5,15 +5,15 @@ import WidgetKit
 #endif
 
 /// The three things NutriScan can analyse. Matches the API's `scanMode` values.
-enum ScanModeOption: String, AppEnum, CaseIterable, Codable, Identifiable {
+public enum ScanModeOption: String, AppEnum, CaseIterable, Codable, Identifiable {
     case plate, receipt, menu
 
-    var id: String { rawValue }
+    public var id: String { rawValue }
 
     /// Value sent to POST /api/v1/analyze.
-    var apiValue: String { rawValue.uppercased() }
+    public var apiValue: String { rawValue.uppercased() }
 
-    var title: String {
+    public var title: String {
         switch self {
         case .plate: return "Log Meal"
         case .receipt: return "Receipt"
@@ -21,7 +21,7 @@ enum ScanModeOption: String, AppEnum, CaseIterable, Codable, Identifiable {
         }
     }
 
-    var symbol: String {
+    public var symbol: String {
         switch self {
         case .plate: return "fork.knife"
         case .receipt: return "receipt"
@@ -29,7 +29,7 @@ enum ScanModeOption: String, AppEnum, CaseIterable, Codable, Identifiable {
         }
     }
 
-    var blurb: String {
+    public var blurb: String {
         switch self {
         case .plate: return "Photograph your plate for portions and macros."
         case .receipt: return "Audit a grocery bill and get healthier swaps."
@@ -37,8 +37,8 @@ enum ScanModeOption: String, AppEnum, CaseIterable, Codable, Identifiable {
         }
     }
 
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Scan Type"
-    static var caseDisplayRepresentations: [ScanModeOption: DisplayRepresentation] = [
+    public static var typeDisplayRepresentation: TypeDisplayRepresentation = "Scan Type"
+    public static var caseDisplayRepresentations: [ScanModeOption: DisplayRepresentation] = [
         .plate: DisplayRepresentation(title: "Meal", image: .init(systemName: "fork.knife")),
         .receipt: DisplayRepresentation(title: "Receipt", image: .init(systemName: "receipt")),
         .menu: DisplayRepresentation(title: "Menu", image: .init(systemName: "menucard")),
@@ -47,28 +47,28 @@ enum ScanModeOption: String, AppEnum, CaseIterable, Codable, Identifiable {
 
 extension Notification.Name {
     /// Posted when an intent asks the running app to open a screen.
-    static let nutriScanOpenRoute = Notification.Name("NutriScanOpenRoute")
+    public static let nutriScanOpenRoute = Notification.Name("NutriScanOpenRoute")
 }
 
 /// Opens the app on the scanner. Used by Shortcuts/Siri, the Action button,
 /// the Control Center control and the Quick Scan widget.
-struct OpenScanIntent: AppIntent {
-    static var title: LocalizedStringResource = "Scan with NutriScan"
-    static var description = IntentDescription("Opens NutriScan's camera to scan a meal, receipt or menu.")
-    static var openAppWhenRun: Bool = true
+public struct OpenScanIntent: AppIntent {
+    public static var title: LocalizedStringResource = "Scan with NutriScan"
+    public static var description = IntentDescription("Opens NutriScan's camera to scan a meal, receipt or menu.")
+    public static var openAppWhenRun: Bool = true
 
     @Parameter(title: "Scan Type", default: .plate)
-    var mode: ScanModeOption
+    public var mode: ScanModeOption
 
-    init() {}
-    init(mode: ScanModeOption) { self.mode = mode }
+    public init() {}
+    public init(mode: ScanModeOption) { self.mode = mode }
 
-    static var parameterSummary: some ParameterSummary {
+    public static var parameterSummary: some ParameterSummary {
         Summary("Scan a \(\.$mode)")
     }
 
     @MainActor
-    func perform() async throws -> some IntentResult {
+    public func perform() async throws -> some IntentResult {
         let route = DeepLink.scan(mode).route
         SharedStore.pendingRoute = route
         NotificationCenter.default.post(name: .nutriScanOpenRoute, object: route)
@@ -78,21 +78,21 @@ struct OpenScanIntent: AppIntent {
 
 /// Adds (or removes, with a negative number) glasses of water.
 /// Runs without opening the app, so it powers the interactive widget buttons.
-struct LogWaterIntent: AppIntent {
-    static var title: LocalizedStringResource = "Log Water"
-    static var description = IntentDescription("Adds glasses of water to today's total in NutriScan.")
+public struct LogWaterIntent: AppIntent {
+    public static var title: LocalizedStringResource = "Log Water"
+    public static var description = IntentDescription("Adds glasses of water to today's total in NutriScan.")
 
     @Parameter(title: "Glasses", default: 1)
-    var glasses: Int
+    public var glasses: Int
 
-    init() {}
-    init(glasses: Int) { self.glasses = glasses }
+    public init() {}
+    public init(glasses: Int) { self.glasses = glasses }
 
-    static var parameterSummary: some ParameterSummary {
+    public static var parameterSummary: some ParameterSummary {
         Summary("Log \(\.$glasses) glass(es) of water")
     }
 
-    func perform() async throws -> some IntentResult & ReturnsValue<Int> & ProvidesDialog {
+    public func perform() async throws -> some IntentResult & ReturnsValue<Int> & ProvidesDialog {
         let h = SharedStore.addWater(max(-10, min(10, glasses)))
         let left = max(0, h.goal - h.glasses)
         let text = left == 0
@@ -103,11 +103,13 @@ struct LogWaterIntent: AppIntent {
 }
 
 /// Reads today's numbers from the last snapshot. Handy for Siri: "NutriScan summary".
-struct TodaySummaryIntent: AppIntent {
-    static var title: LocalizedStringResource = "Today's Nutrition Summary"
-    static var description = IntentDescription("Tells you today's calories eaten and burned, steps and water.")
+public struct TodaySummaryIntent: AppIntent {
+    public static var title: LocalizedStringResource = "Today's Nutrition Summary"
+    public static var description = IntentDescription("Tells you today's calories eaten and burned, steps and water.")
 
-    func perform() async throws -> some IntentResult & ProvidesDialog {
+    public init() {}
+
+    public func perform() async throws -> some IntentResult & ProvidesDialog {
         let s = SharedStore.loadSnapshot() ?? .empty
         let water = SharedStore.hydration()
         var parts: [String] = []

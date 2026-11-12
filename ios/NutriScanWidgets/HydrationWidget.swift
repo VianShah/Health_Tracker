@@ -1,6 +1,9 @@
 import AppIntents
 import SwiftUI
 import WidgetKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Interactive (iOS 17+): the + / − buttons run LogWaterIntent in place.
 struct HydrationWidget: Widget {
@@ -45,6 +48,13 @@ struct HydrationWidgetView: View {
                         }
                     }
                     .frame(width: 70, height: 70)
+                    #if XTOOL
+                    // xtool can't generate App Intents metadata, so intent buttons
+                    // may not fire. Tapping the widget adds a glass via deep link.
+                    Label("Tap to add", systemImage: "plus.circle.fill")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(WTheme.water)
+                    #else
                     HStack {
                         Button(intent: LogWaterIntent(glasses: -1)) {
                             Image(systemName: "minus").frame(maxWidth: .infinity)
@@ -56,9 +66,13 @@ struct HydrationWidgetView: View {
                         .tint(WTheme.water)
                     }
                     .font(.caption.weight(.bold))
+                    #endif
                 }
             }
         }
+        #if XTOOL
+        .widgetURL(DeepLink.addWater(1).url)
+        #endif
         .containerBackground(for: .widget) {
             if family == .accessoryCircular { AccessoryWidgetBackground() } else { Color(.systemBackground) }
         }

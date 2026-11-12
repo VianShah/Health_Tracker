@@ -1,5 +1,8 @@
 import Foundation
 import HealthKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Reads daily totals from Apple Health. Read-only: NutriScan never writes.
 /// Replaces the "Health Auto Export / Shortcut" setup the web app needs —

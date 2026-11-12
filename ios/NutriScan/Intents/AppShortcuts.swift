@@ -1,4 +1,7 @@
 import AppIntents
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Uploads recent Apple Health data. Runs in the background without opening the app.
 struct SyncHealthIntent: AppIntent {

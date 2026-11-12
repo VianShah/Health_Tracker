@@ -1,5 +1,8 @@
 import PhotosUI
 import SwiftUI
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 struct ScanView: View {
     @EnvironmentObject private var model: AppModel

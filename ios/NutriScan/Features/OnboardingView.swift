@@ -1,4 +1,7 @@
 import SwiftUI
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// First screen. "Continue without an account" needs nothing at all (the server
 /// creates an anonymous guest ID tied to a secret kept in this phone's Keychain).

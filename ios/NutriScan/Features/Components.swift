@@ -1,7 +1,10 @@
 import SwiftUI
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 enum Theme {
-    static let brand = Color("AccentColor")
+    static let brand = Color(red: 0.082, green: 0.718, blue: 0.616) // #15B79D (no asset catalog needed for xtool)
     static let good = Color(red: 0.08, green: 0.72, blue: 0.48)
     static let ok = Color(red: 0.96, green: 0.65, blue: 0.14)
     static let bad = Color(red: 0.91, green: 0.30, blue: 0.24)

@@ -18,8 +18,9 @@ no Firebase SDK, no CocoaPods/SPM packages.
 | **Reminders** | Local meal and water notifications with action buttons (no push server). |
 | **Background refresh** | Syncs Health and refreshes widgets about hourly. |
 
-Requirements: a Mac with **Xcode 16** or newer, an iPhone on **iOS 17** or newer
-(Control Center controls need iOS 18).
+Requirements: an iPhone on **iOS 17** or newer (Control Center controls need iOS 18), and either
+- a Mac with **Xcode 16** or newer — follow the steps below, or
+- **no Mac**: Linux or Windows (WSL) with [xtool](https://github.com/xtool-org/xtool) — follow **[XTOOL.md](XTOOL.md)**.
 
 ---
 
@@ -164,7 +165,9 @@ ios/
 │   └── Features/                 Onboarding, Today, Scan, Result, History, Insights, Settings
 ├── NutriScanWidgets/             WidgetKit extension: Today, Water, Quick Scan, controls
 ├── NutriScan.xcodeproj           Xcode 16 project (folder-synced: new files are picked up automatically)
-└── project.yml                   XcodeGen fallback spec
+├── project.yml                   XcodeGen fallback spec
+├── Package.swift, xtool.yml      build without a Mac (xtool) — see XTOOL.md
+└── Support/                      Info.plists + entitlements for xtool builds
 ```
 
 ### API endpoints used

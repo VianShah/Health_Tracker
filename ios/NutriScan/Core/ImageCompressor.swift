@@ -1,4 +1,7 @@
 import UIKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Shrinks photos before upload. The API forwards images under ~450 KB
 /// straight to the model and only re-compresses bigger ones server-side,

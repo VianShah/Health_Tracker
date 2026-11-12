@@ -1,5 +1,8 @@
 import SwiftUI
 import WidgetKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 struct NutriEntry: TimelineEntry {
     let date: Date
@@ -48,7 +51,7 @@ struct NutriProvider: TimelineProvider {
 }
 
 enum WTheme {
-    static let brand = Color("AccentColor")
+    static let brand = Color(red: 0.082, green: 0.718, blue: 0.616) // #15B79D (no asset catalog needed for xtool)
     static let eaten = Color(red: 0.98, green: 0.52, blue: 0.20)
     static let burned = Color(red: 0.20, green: 0.55, blue: 0.95)
     static let steps = Color(red: 0.08, green: 0.72, blue: 0.48)

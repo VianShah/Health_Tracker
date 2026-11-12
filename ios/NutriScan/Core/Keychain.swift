@@ -1,5 +1,8 @@
 import Foundation
 import Security
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Minimal Keychain wrapper for small Codable values (tokens, secrets).
 /// Items are only readable after first unlock, on this device only.

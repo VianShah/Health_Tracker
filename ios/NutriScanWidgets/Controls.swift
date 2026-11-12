@@ -1,6 +1,9 @@
 import AppIntents
 import SwiftUI
 import WidgetKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Control Center / Lock Screen / Action button controls (iOS 18+).
 

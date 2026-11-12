@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// The nutrition profile sent with each scan (`userProfile` in POST /analyze).
 /// For a linked Balance Nutrition client it is read from the BN API (same as the

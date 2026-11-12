@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Pushes Apple Health data to the server with a per-user sync key.
 /// The key is created through POST /health/key (JWT) and kept in the Keychain.

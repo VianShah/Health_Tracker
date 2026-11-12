@@ -2,6 +2,9 @@ import AppIntents
 import Charts
 import SwiftUI
 import WidgetKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 struct TodayWidget: Widget {
     let kind = "NutriScanToday"
@@ -182,10 +185,17 @@ struct TodayWidgetView: View {
             Spacer(minLength: 0)
             if let last = s.lastScan { lastScanRow(last) }
             HStack {
+                #if XTOOL
+                Link(destination: DeepLink.addWater(1).url) {
+                    Label("Water", systemImage: "drop.fill").font(.caption.weight(.semibold))
+                        .foregroundStyle(WTheme.water)
+                }
+                #else
                 Button(intent: LogWaterIntent(glasses: 1)) {
                     Label("Water", systemImage: "drop.fill").font(.caption.weight(.semibold))
                 }
                 .tint(WTheme.water)
+                #endif
                 Spacer()
                 Link(destination: DeepLink.scan(.plate).url) {
                     Label("Scan meal", systemImage: "camera.fill")

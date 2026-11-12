@@ -1,5 +1,8 @@
 import Charts
 import SwiftUI
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 struct InsightsView: View {
     @EnvironmentObject private var model: AppModel

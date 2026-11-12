@@ -1,0 +1,18 @@
+# xtool build config — see XTOOL.md
+version: 1
+
+# CHANGE "yourname" to something unique. Keep the same value in:
+#   - extensions[0].bundleID below (+ ".widgets")
+#   - Support/NutriScan.entitlements and Support/NutriScanWidgets.entitlements ("group." + this)
+bundleID: com.yourname.nutriscan
+
+product: NutriScan
+infoPath: Support/NutriScan-Info.plist
+entitlementsPath: Support/NutriScan.entitlements
+iconPath: NutriScan/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+
+extensions:
+  - product: NutriScanWidgets
+    bundleID: com.yourname.nutriscan.widgets
+    infoPath: Support/NutriScanWidgets-Info.plist
+    entitlementsPath: Support/NutriScanWidgets.entitlements

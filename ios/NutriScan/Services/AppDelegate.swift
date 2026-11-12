@@ -1,5 +1,8 @@
 import UIKit
 import UserNotifications
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication,

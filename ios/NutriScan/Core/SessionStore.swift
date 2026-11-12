@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// What we keep about the signed-in user. Stored in the Keychain.
 struct StoredSession: Codable, Equatable {

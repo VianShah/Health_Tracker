@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>NutriScan</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>nutriscan</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>nutriscan</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>google-oauth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.unset</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<!-- Lets you point the app at a dev server on your LAN over plain http. -->
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>NutriScan uses the camera to photograph meals, receipts and menus for nutrition analysis.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>NutriScan lets you pick meal, receipt and menu photos to analyse.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>NutriScan reads steps, active and resting energy, exercise minutes, distance, sleep, weight and resting heart rate to compare what you eat with what you burn.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>NutriScan does not write to Apple Health.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Used only when you point NutriScan at a development server on your network.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.nutriscan.app.refresh</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>NSUserActivityTypes</key>
+	<array/>
+	<!-- Read by the app at runtime (see AppConfig.swift). EDIT THESE for xtool builds. -->
+	<key>NutriScanAPIBaseURL</key>
+	<string>https://your-nutriscan-host.web.app</string>
+	<key>NutriScanGoogleClientID</key>
+	<string></string>
+	<key>NutriScanGoogleReversedClientID</key>
+	<string>com.googleusercontent.apps.unset</string>
+</dict>
+</plist>

@@ -1,4 +1,7 @@
 import SwiftUI
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 struct HistoryView: View {
     @EnvironmentObject private var model: AppModel

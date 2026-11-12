@@ -1,5 +1,8 @@
 import SwiftUI
 import WidgetKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 struct TodayView: View {
     @EnvironmentObject private var model: AppModel

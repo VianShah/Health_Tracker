@@ -25,7 +25,5 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.widgetkit-extension</string>
 	</dict>
-	<key>NutriScanAppGroupID</key>
-	<string>$(APP_GROUP_ID)</string>
 </dict>
 </plist>

@@ -2,6 +2,9 @@ import AuthenticationServices
 import CryptoKit
 import Foundation
 import UIKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 /// Google sign-in without any third-party SDK:
 ///   1. ASWebAuthenticationSession → Google OAuth (PKCE, iOS client, no secret)

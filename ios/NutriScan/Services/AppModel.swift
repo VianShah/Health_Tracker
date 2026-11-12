@@ -1,6 +1,9 @@
 import Foundation
 import SwiftUI
 import BackgroundTasks
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 enum AppTab: Hashable { case today, scan, history, insights, settings }
 
@@ -25,7 +28,9 @@ final class AppModel: ObservableObject {
     /// Set to open the scanner preset to a mode (from a widget, control, shortcut or notification).
     @Published var requestedScanMode: ScanModeOption?
 
-    static var backgroundTaskID: String { (Bundle.main.bundleIdentifier ?? "nutriscan") + ".refresh" }
+    /// Fixed (not derived from the bundle ID) because xtool prefixes bundle IDs at signing time.
+    /// Must match BGTaskSchedulerPermittedIdentifiers in the Info.plist.
+    static let backgroundTaskID = "com.nutriscan.app.refresh"
 
     private init() {
         session = SessionStore()
@@ -118,6 +123,9 @@ final class AppModel: ObservableObject {
         case .history: selectedTab = .history
         case .insights: selectedTab = .insights
         case .settings: selectedTab = .settings
+        case .addWater(let n):
+            SharedStore.addWater(n)
+            selectedTab = .today
         }
     }
 

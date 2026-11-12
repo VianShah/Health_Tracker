@@ -1,6 +1,9 @@
 import AppIntents
 import SwiftUI
 import WidgetKit
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 struct QuickScanWidget: Widget {
     let kind = "NutriScanQuickScan"
@@ -48,7 +51,20 @@ struct QuickScanView: View {
             } else {
                 VStack(spacing: 6) {
                     ForEach(ScanModeOption.allCases) { mode in
+                        #if XTOOL
+                        // Whole widget opens the meal scanner (widgetURL below).
+                        HStack {
+                            Image(systemName: mode.symbol).frame(width: 20)
+                            Text(mode.title).font(.caption.weight(.semibold))
+                            Spacer()
+                        }
+                        .padding(.horizontal, 10)
+                        .frame(maxHeight: .infinity)
+                        .background(WTheme.brand.opacity(0.14), in: RoundedRectangle(cornerRadius: 10))
+                        .foregroundStyle(WTheme.brand)
+                        #else
                         // Small widgets ignore Link; an intent button routes correctly.
+                        // (xtool builds use widgetURL below instead.)
                         Button(intent: OpenScanIntent(mode: mode)) {
                             HStack {
                                 Image(systemName: mode.symbol).frame(width: 20)
@@ -61,10 +77,14 @@ struct QuickScanView: View {
                             .foregroundStyle(WTheme.brand)
                         }
                         .buttonStyle(.plain)
+                        #endif
                     }
                 }
             }
         }
+        #if XTOOL
+        .widgetURL(family == .systemSmall ? DeepLink.scan(.plate).url : nil)
+        #endif
         .containerBackground(for: .widget) { Color(.systemBackground) }
     }
 }

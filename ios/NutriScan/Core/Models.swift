@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(NutriScanShared)
+import NutriScanShared
+#endif
 
 // MARK: - Lenient number decoding
 // The API is fed by an LLM, so numbers occasionally arrive as strings.
