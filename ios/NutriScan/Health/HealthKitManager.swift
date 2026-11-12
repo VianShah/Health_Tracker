@@ -103,9 +103,9 @@ final class HealthKitManager {
         async let restingHr = averages(.restingHeartRate, unit: .count().unitDivided(by: .minute()), from: start, to: end)
         // Sleep that ended on a given day counts for that day, so start a day earlier.
         async let sleep = sleepHours(from: cal.date(byAdding: .hour, value: -18, to: start)!, to: end)
-        async let workouts = workouts(from: start, to: end)
+        async let workoutMap = workouts(from: start, to: end)
 
-        let (s, a, b, e, dist, w, hr, sl, wo) = try await (steps, active, basal, exercise, distance, weight, restingHr, sleep, workouts)
+        let (s, a, b, e, dist, w, hr, sl, wo) = try await (steps, active, basal, exercise, distance, weight, restingHr, sleep, workoutMap)
 
         for key in days.keys {
             days[key]?.steps = s[key]

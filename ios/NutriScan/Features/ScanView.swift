@@ -7,7 +7,7 @@ struct ScanView: View {
     @EnvironmentObject private var session: SessionStore
 
     @State private var mode: ScanModeOption = .plate
-    @State private var images: [UIImage] = []
+    @State private var images: [PickedImage] = []
     @State private var pickerItems: [PhotosPickerItem] = []
     @State private var showCamera = false
     @State private var mealType = "Auto"
@@ -39,13 +39,13 @@ struct ScanView: View {
                     if !images.isEmpty {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 10) {
-                                ForEach(images.indices, id: \.self) { i in
-                                    Image(uiImage: images[i])
+                                ForEach(images) { picked in
+                                    Image(uiImage: picked.image)
                                         .resizable().scaledToFill()
                                         .frame(width: 96, height: 120)
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
                                         .overlay(alignment: .topTrailing) {
-                                            Button { images.remove(at: i) } label: {
+                                            Button { images.removeAll { $0.id == picked.id } } label: {
                                                 Image(systemName: "xmark.circle.fill")
                                                     .symbolRenderingMode(.palette)
                                                     .foregroundStyle(.white, .black.opacity(0.6))
@@ -135,7 +135,7 @@ struct ScanView: View {
             }
             .fullScreenCover(isPresented: $showCamera) {
                 CameraPicker { image in
-                    if let image { images.append(image) }
+                    if let image { images.append(PickedImage(image: image)) }
                 }
                 .ignoresSafeArea()
             }
@@ -161,7 +161,7 @@ struct ScanView: View {
         for item in items {
             if images.count >= maxImages { break }
             if let data = try? await item.loadTransferable(type: Data.self), let img = UIImage(data: data) {
-                images.append(img)
+                images.append(PickedImage(image: img))
             }
         }
         pickerItems = []
@@ -172,7 +172,7 @@ struct ScanView: View {
         defer { analyzing = false }
 
         let currentMode = mode
-        let photos = images
+        let photos = images.map(\.image)
         let jpegs = await Task.detached(priority: .userInitiated) {
             photos.compactMap { ImageCompressor.jpeg(for: $0, mode: currentMode) }
         }.value
@@ -194,6 +194,11 @@ struct ScanView: View {
             self.error = error.localizedDescription
         }
     }
+}
+
+struct PickedImage: Identifiable {
+    let id = UUID()
+    let image: UIImage
 }
 
 /// UIKit camera wrapped for SwiftUI.

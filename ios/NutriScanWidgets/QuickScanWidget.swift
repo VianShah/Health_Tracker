@@ -1,3 +1,4 @@
+import AppIntents
 import SwiftUI
 import WidgetKit
 
@@ -47,7 +48,8 @@ struct QuickScanView: View {
             } else {
                 VStack(spacing: 6) {
                     ForEach(ScanModeOption.allCases) { mode in
-                        Link(destination: DeepLink.scan(mode).url) {
+                        // Small widgets ignore Link; an intent button routes correctly.
+                        Button(intent: OpenScanIntent(mode: mode)) {
                             HStack {
                                 Image(systemName: mode.symbol).frame(width: 20)
                                 Text(mode.title).font(.caption.weight(.semibold))
@@ -58,6 +60,7 @@ struct QuickScanView: View {
                             .background(WTheme.brand.opacity(0.14), in: RoundedRectangle(cornerRadius: 10))
                             .foregroundStyle(WTheme.brand)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
             }
