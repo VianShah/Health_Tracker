@@ -1,0 +1,19 @@
+# The .gcloudignore file dictates what Google Cloud Run ignores during deployment.
+node_modules/
+.env
+.git/
+.gitignore
+.dockerignore
+firebase.json
+.firebaserc
+firestore.indexes.json
+firestore.rules
+client_data*.json
+*.md
+
+# Credentials (NEVER upload the service account to GCP!)
+.json
+service-account*.json
+
+# Web Frontend (Since this is purely an API backend, we don't deploy the test frontend)
+public/

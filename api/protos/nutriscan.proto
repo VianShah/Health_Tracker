@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package nutriscan;
+
+// ── Health Check Service ─────────────────────────────────────────────────────
+// A simple unary RPC for liveness/readiness probes and diagnostics.
+
+service NutriScanService {
+  // Basic health check — mirrors /api/v1/health but over gRPC
+  rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse);
+
+  // Lightweight ping for load balancer / readiness probes
+  rpc Ping (PingRequest) returns (PingResponse);
+}
+
+message HealthCheckRequest {
+  // intentionally empty — no input needed
+}
+
+message HealthCheckResponse {
+  string status = 1;           // "healthy" or "unhealthy"
+  string uptime = 2;           // e.g. "2h 15m 30s"
+  string timestamp = 3;        // ISO 8601
+  string version = 4;          // API version string
+  string database = 5;         // "connected" / "disconnected"
+  string environment = 6;      // "development" / "production"
+  string region = 7;           // "GCP-CloudRun" / "Local"
+  double memoryHeapUsedMB = 8; // heap in MB
+}
+
+message PingRequest {}
+
+message PingResponse {
+  string message = 1;  // "pong"
+  int64 serverTime = 2; // Unix ms
+}
