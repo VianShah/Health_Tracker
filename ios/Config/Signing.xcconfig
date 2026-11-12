@@ -1,0 +1,35 @@
+// ─────────────────────────────────────────────────────────────────────────────
+//  NutriScan iOS — the ONLY file you need to edit before pressing Run.
+//
+//  Works with a FREE Apple ID (Xcode "Personal Team"). No paid developer
+//  account is needed. See ios/README.md for the 5-minute setup.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// 1) Your team ID. Leave empty and pick "Your Name (Personal Team)" in
+//    Xcode > target > Signing & Capabilities, or paste the 10-character ID
+//    Xcode shows there so both targets pick it up automatically.
+DEVELOPMENT_TEAM =
+
+// 2) A reverse-DNS prefix that is unique to YOU. Free accounts cannot reuse a
+//    bundle ID somebody else already registered, so change "yourname".
+//    The app, widget and App Group IDs are all derived from this value.
+BUNDLE_ID_PREFIX = com.yourname.nutriscan
+
+// 3) Where the NutriScan API runs. Note the "/$()/" trick: xcconfig treats
+//    "//" as a comment, so it has to be written this way.
+//    For a server on your Mac, use your Mac's LAN IP, e.g. http:/$()/192.168.1.20:3002
+//    (can also be changed later inside the app: Settings > Server).
+API_BASE_URL = https:/$()/your-nutriscan-host.web.app
+
+// 4) Optional: Google sign-in. Create an "iOS" OAuth client in the SAME Google
+//    Cloud project as your Firebase app (APIs & Services > Credentials), with
+//    bundle ID = $(BUNDLE_ID_PREFIX). Paste its client ID here, e.g.
+//    1234567890-abcdefg.apps.googleusercontent.com
+//    Leave empty to offer guest mode only (no account needed at all).
+GOOGLE_IOS_CLIENT_ID =
+// Reversed client ID, used as the OAuth redirect URL scheme, e.g.
+// com.googleusercontent.apps.1234567890-abcdefg
+GOOGLE_REVERSED_CLIENT_ID = com.googleusercontent.apps.unset
+
+// Derived — no need to touch.
+APP_GROUP_ID = group.$(BUNDLE_ID_PREFIX)

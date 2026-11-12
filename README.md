@@ -22,6 +22,14 @@ NutriScan is a high-performance, AI-driven nutritional analysis engine designed 
 
 ---
 
+## 📱 iPhone App
+
+A native SwiftUI app lives in [`ios/`](ios/README.md): scanning, history, Apple Health sync,
+Home Screen / Lock Screen / Control Center widgets and Siri shortcuts. It installs on your own
+iPhone with a **free Apple ID** — see [ios/README.md](ios/README.md) for the 5-minute setup.
+
+---
+
 ## 🏗️ Technical Architecture
 
 -   **Runtime**: Node.js / Express.js
